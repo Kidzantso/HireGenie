@@ -1,0 +1,6 @@
+.venv/
+.env.example
+backend/__pycache__/
+frontend/__pycache__/
+streamlit.err.log
+streamlit.out.log
