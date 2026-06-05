@@ -99,9 +99,10 @@ TECHNICAL_INTERVIEW_PROMPT = ChatPromptTemplate.from_messages(
         (
             "system",
             (
-                "You are a senior technical interviewer. Generate realistic, industry-level interview "
-                "questions that adapt to the candidate's experience and the target role. Return only "
-                "structured data matching the provided schema."
+                "You are a senior technical interviewer."
+                " Generate realistic, industry-level interview questions."
+                " Every question must evaluate a specific technical skill."
+                " Return only structured data matching the provided schema."
             ),
         ),
         (
@@ -110,13 +111,27 @@ TECHNICAL_INTERVIEW_PROMPT = ChatPromptTemplate.from_messages(
                 "Job Description:\n{job_description}\n\n"
                 "Candidate Summary:\n{candidate_summary}\n\n"
                 "Candidate Projects:\n{candidate_projects}\n\n"
-                "Generate exactly 10 technical questions:\n"
-                "- 5 technical questions related to the required job skills.\n"
-                "- 3 project-based questions related to the candidate projects.\n"
-                "- 2 deep follow-up questions that test real understanding.\n\n"
-                "Focus on problem solving, implementation details, architecture, challenges, technologies used, "
-                "model choices, deployment, optimization, debugging, and the candidate's real contribution. "
-                "Avoid generic questions."
+                
+                "Generate exactly 10 technical interview questions:\n"
+                "- 5 job-related technical questions.\n"
+                "- 3 project-specific questions.\n"
+                "- 2 advanced follow-up questions.\n\n"
+
+                "For EACH question:\n"
+                "- Identify the skill being assessed.\n"
+                "- The skill must be directly related to the job requirements.\n"
+                "- If the question is project-based, connect it to a specific project.\n"
+                "- Focus on practical implementation, architecture, debugging, optimization, deployment, "
+                "technology choices, and real-world problem solving.\n"
+                "- Avoid theoretical or generic questions.\n\n"
+
+                "Examples:\n"
+                "Question: How would you optimize retrieval latency in a FAISS-based RAG system?\n"
+                "Skill Measured: Vector Databases\n\n"
+
+                "Question: In your chatbot project, why did you choose LangChain instead of building "
+                "the orchestration manually?\n"
+                "Skill Measured: LLM Application Design"
             ),
         ),
     ]
@@ -128,8 +143,10 @@ BEHAVIORAL_INTERVIEW_PROMPT = ChatPromptTemplate.from_messages(
         (
             "system",
             (
-                "You are an HR interviewer. Generate behavioral questions tailored to the role and the "
-                "candidate summary. Return only structured data matching the provided schema."
+                "You are an experienced HR interviewer."
+                " Generate realistic situational and behavioral interview questions."
+                " Every question must evaluate a specific soft skill."
+                " Return only structured data matching the provided schema."
             ),
         ),
         (
@@ -137,8 +154,35 @@ BEHAVIORAL_INTERVIEW_PROMPT = ChatPromptTemplate.from_messages(
             (
                 "Job Description:\n{job_description}\n\n"
                 "Candidate Summary:\n{candidate_summary}\n\n"
-                "Generate exactly 5 behavioral interview questions focused on teamwork, leadership, "
-                "communication, handling pressure, and conflict resolution."
+
+                "Generate exactly 5 situational or behavioral interview questions.\n\n"
+
+                "For EACH question:\n"
+                "- Create a realistic workplace scenario.\n"
+                "- Identify the soft skill being evaluated.\n"
+                "- Use skills such as:\n"
+                "  * Communication\n"
+                "  * Teamwork\n"
+                "  * Leadership\n"
+                "  * Conflict Resolution\n"
+                "  * Adaptability\n"
+                "  * Problem Solving\n"
+                "  * Time Management\n"
+                "  * Decision Making\n"
+                "  * Accountability\n"
+                "  * Resilience\n\n"
+
+                "- Avoid generic questions such as:\n"
+                "  * Tell me about yourself\n"
+                "  * What are your strengths?\n\n"
+
+                "Examples:\n"
+                "Question: Tell me about a time when you disagreed with a teammate on a technical decision.\n"
+                "Soft Skill Measured: Conflict Resolution\n\n"
+
+                "Question: Describe a situation where multiple deadlines competed for your attention. "
+                "How did you prioritize your work?\n"
+                "Soft Skill Measured: Time Management"
             ),
         ),
     ]

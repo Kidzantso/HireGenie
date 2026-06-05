@@ -63,23 +63,48 @@ class HiringRecommendationOutput(BaseModel):
     rejection_email: str = Field(description="Polite rejection email explaining key gaps for Reject outcomes.")
 
 
+class TechnicalQuestion(BaseModel):
+    question: str = Field(
+        description="Technical interview question."
+    )
+
+    skill_measured: str = Field(
+        description="Technical skill being assessed by this question."
+    )
+
+
 class TechnicalInterviewQuestions(BaseModel):
     """Technical question set produced by the Interview Generation Agent."""
 
-    technical_questions: list[str] = Field(
+    technical_questions: list[TechnicalQuestion] = Field(
         min_length=10,
-        description="Five technical, three project-based, and two deep follow-up interview questions.",
+        description=(
+            "Five technical questions, three project-based questions, "
+            "and two advanced follow-up questions."
+        ),
+    )
+
+
+class BehavioralQuestion(BaseModel):
+    question: str = Field(
+        description="Behavioral or situational interview question."
+    )
+
+    soft_skill_measured: str = Field(
+        description="Soft skill being evaluated by the question."
     )
 
 
 class BehavioralInterviewQuestions(BaseModel):
     """Behavioral question set produced by the Interview Generation Agent."""
 
-    behavioral_questions: list[str] = Field(
+    behavioral_questions: list[BehavioralQuestion] = Field(
         min_length=5,
-        description="Five behavioral interview questions tailored to the job and candidate profile.",
+        description=(
+            "Five behavioral or situational interview questions "
+            "with the associated soft skill being assessed."
+        ),
     )
-
 
 class InterviewQuestionOutput(TechnicalInterviewQuestions, BehavioralInterviewQuestions):
     """Strict structured output produced by the Interview Generation Agent."""
