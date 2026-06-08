@@ -39,6 +39,27 @@ class GapItem(BaseModel):
     severity: Literal["Low", "Medium", "High"] = Field(description="Impact of this gap on hiring fit.")
 
 
+class JobAnalysisOutput(BaseModel):
+    """Strict structured output produced by the Job Analysis Agent."""
+
+    job_title: str = Field(description="Job title from the job description, or 'Unknown' if missing.")
+    experience_level: Literal["Intern", "Junior", "Mid", "Senior", "Lead", "Unknown"] = Field(
+        description="Seniority level inferred from title, responsibilities, and experience requirements."
+    )
+    years_of_experience: str = Field(description="Required years of experience, or 'Unknown' if not specified.")
+    must_have_skills: list[str] = Field(description="Required technical, tool, platform, and hard business skills.")
+    nice_to_have_skills: list[str] = Field(description="Preferred, bonus, optional, or plus skills.")
+    soft_skills: list[str] = Field(description="Required soft, collaboration, communication, and business skills.")
+    responsibilities: list[str] = Field(description="Core job duties and role responsibilities.")
+    education_requirements: list[str] = Field(description="Degree or education requirements.")
+    certifications: list[str] = Field(description="Required or preferred certifications.")
+    domain_or_industry: str = Field(description="Industry or domain context, or 'Unknown' if not specified.")
+    location_requirements: str = Field(description="Location, remote, hybrid, on-site, relocation, or travel requirements.")
+    employment_type: str = Field(description="Full-time, part-time, contract, internship, temporary, or 'Unknown'.")
+    language_requirements: list[str] = Field(description="Required spoken or written languages.")
+    summary: str = Field(description="Concise summary of the structured hiring requirements.")
+
+
 class CVScreeningOutput(BaseModel):
     """Strict structured output produced by the CV Screening Specialist."""
 

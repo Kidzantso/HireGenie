@@ -2,5 +2,6 @@
 .env.example
 backend/__pycache__/
 frontend/__pycache__/
+tests/__pycache__/
 streamlit.err.log
 streamlit.out.log
